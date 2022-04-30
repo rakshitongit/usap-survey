@@ -1,0 +1,8 @@
+{
+  "name": "USaP Survey",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "411d4afb"
+}
