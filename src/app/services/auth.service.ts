@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserDetails } from '../pages/my-profile/my-profile.component';
 import { StorageKeys, StorageService } from './storage.service';
 
 @Injectable({
@@ -10,8 +11,8 @@ export class AuthService {
     }
 
 
-    public async login() {
-        this.storageService.set(StorageKeys.USER, 'user')
+    public async login(user: UserDetails) {
+        this.storageService.set(StorageKeys.USER, user)
         console.log(await this.storageService.get(StorageKeys.USER))
     }
 

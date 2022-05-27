@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,10 +9,39 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MyProfileComponent implements OnInit {
 
-    constructor(private authService: AuthService) { }
+    user: UserDetails = new UserDetails()
 
-    ngOnInit() {
-        this.authService.login()
+    buttonLoading: boolean = false
+
+    customOptions: any = {
+        header: 'Department',
+        subHeader: 'Select your department'
+    };
+
+    constructor(private authService: AuthService, private router: Router) { }
+
+    ngOnInit() { }
+
+    createUser() {
+        console.log(this.user)
+        this.authService.login(this.user)
+        this.buttonLoading = !this.buttonLoading
+        setTimeout(() => {
+            this.router.navigateByUrl('/survey')
+        }, 1000)
     }
 
+}
+
+export class UserDetails {
+    name: string
+    firstName: string
+    age: number
+    gender: Gender
+    department: string
+    qualification: string
+}
+
+enum Gender {
+    MALE, FEMALE
 }

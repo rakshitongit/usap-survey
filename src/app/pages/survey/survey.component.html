@@ -17,25 +17,87 @@
   <ion-card>
     <ion-card-header>
       <ion-item>
-        <!-- <ion-icon name="warning" slot="start"></ion-icon> -->
         <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>Type of Authentication?</ion-label>
-        <!-- <ion-button fill="outline" slot="end">View</ion-button> -->
+        <ion-label>A Survey for Authentication</ion-label>
       </ion-item>
     </ion-card-header>
+    <form [formGroup]="surveyForm" (ngSubmit)="submitSurvey()" novalidate>
     <ion-card-content>
-      <div>
-      </div>
+      
       <ion-list>
-        <ion-item *ngFor="let entry of ['Password type','Card/Chip based','Authenticator token based','Physical key']">
-          <ion-label>{{entry}}</ion-label>
-          <ion-checkbox slot="end"></ion-checkbox>
-        </ion-item>
+        <ion-radio-group [(ngModel)]="surveyData.auth_what" formControlName="auth_what">
+          <ion-list-header>
+            <ion-list>
+              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+              <ion-label>What are you trying to authenticate?</ion-label>
+            </ion-list>
+          </ion-list-header>
+
+          <ion-item
+            *ngFor="let entry of ['Mobile/Tablet','Laptop/PC','Physical Lock','Website Account', 'Banking Transaction']">
+            <ion-label>{{entry}}</ion-label>
+            <ion-radio slot="start" [value]="entry"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
       </ion-list>
-      <br>
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="surveyData.auth_type" formControlName="auth_type">
+          <ion-list-header>
+            <ion-list>
+              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+              <ion-label>Which authenticator you are using?</ion-label>
+            </ion-list>
+          </ion-list-header>
+
+          <ion-item
+            *ngFor="let entry of ['Password', 'Pin', 'Pattern', 'Biometrics', 'Physical token', 'Other']">
+            <ion-label>{{entry}}</ion-label>
+            <ion-radio slot="start" [value]="entry"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="surveyData.auth_failure" formControlName="auth_failure">
+          <ion-list-header>
+            <ion-list>
+              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+              <ion-label>How many time have you failed to login?</ion-label>
+            </ion-list>
+          </ion-list-header>
+
+          <ion-item
+            *ngFor="let entry of ['none: successful', 'less than 3', 'less than 5 times', 'less than 10 times']">
+            <ion-label>{{entry}}</ion-label>
+            <ion-radio slot="start" [value]="entry"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="surveyData.auth_convinience" formControlName="auth_convinience">
+          <ion-list-header>
+            <ion-list>
+              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+              <ion-label>How convinient was it to authenticate? </ion-label>
+            </ion-list>
+          </ion-list-header>
+
+          <ion-item
+            *ngFor="let entry of ['Very convenient', 'Moderately convenient', 'Not convenient']">
+            <ion-label>{{entry}}</ion-label>
+            <ion-radio slot="start" [value]="entry"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
     </ion-card-content>
+    <ion-list>
+      <ion-button (click)="submitSurvey()" expand="block" color="tertiary" [disabled]="buttonLoading">Submit
+        &nbsp;&nbsp;<ion-spinner *ngIf="buttonLoading" name="bubbles"></ion-spinner>
+      </ion-button>
+    </ion-list>
+  </form>
   </ion-card>
-  <ion-list style="text-align:center; background-color: var(--ion-background-color);">
-    <ion-button color="tertiary">Submit &nbsp;&nbsp;<ion-spinner name="bubbles"></ion-spinner></ion-button>
-  </ion-list>
 </ion-content>

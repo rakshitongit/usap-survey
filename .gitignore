@@ -31,5 +31,6 @@ npm-debug.log*
 /plugins
 /www
 /android
+/ios
 *.csr
 *.keystore
