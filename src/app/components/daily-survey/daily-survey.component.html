@@ -1,0 +1,116 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>End of the day Questions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>Daily Questionnaire</ion-label>
+      </ion-item>
+    </ion-card-header>
+    <form [formGroup]="surveyForm" (ngSubmit)="submitSurvey()" novalidate>
+      <ion-card-content>
+
+        <ion-list>
+          <ion-radio-group formControlName="third_party">
+            <ion-list-header>
+              <ion-list>
+                <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+                <ion-label>Do you use any third party application to remember the password/authenticator?</ion-label>
+              </ion-list>
+            </ion-list-header>
+
+            <ion-item *ngFor="let entry of ['Yes','No']">
+              <ion-label>{{entry}}</ion-label>
+              <ion-radio slot="start" [value]="entry"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-list>
+          <ion-radio-group formControlName="third_party_trust">
+            <ion-list-header>
+              <ion-list>
+                <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+                <ion-label>Do you trust the third party application you use for authentication?</ion-label>
+              </ion-list>
+            </ion-list-header>
+
+            <ion-item *ngFor="let entry of ['Yes', 'No', 'Yes, but not completely']">
+              <ion-label>{{entry}}</ion-label>
+              <ion-radio slot="start" [value]="entry"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-list>
+          <ion-radio-group formControlName="forgot_to_log">
+            <ion-list-header>
+              <ion-list>
+                <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+                <ion-label>How many times did you forget to log the authentication event in the application?</ion-label>
+              </ion-list>
+            </ion-list-header>
+
+            <ion-item
+              *ngFor="let entry of ['None', 'less than 3 times', 'less than 5 times', 'less than 10 times', 'more then 10 times']">
+              <ion-label>{{entry}}</ion-label>
+              <ion-radio slot="start" [value]="entry"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-list>
+          <ion-radio-group formControlName="no_physical_auths">
+            <ion-list-header>
+              <ion-list>
+                <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+                <ion-label>How many physical authenticators do you carry?</ion-label>
+              </ion-list>
+            </ion-list-header>
+
+            <ion-item *ngFor="let entry of ['None', 'less than 3 times', 'less than 5 times', 'less than 10 times', 'more then 10 times']">
+              <ion-label>{{entry}}</ion-label>
+              <ion-radio slot="start" [value]="entry"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-list>
+          <ion-radio-group formControlName="affect_productivity">
+            <ion-list-header>
+              <ion-list>
+                <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+                <ion-label>Does the authentication process affect your productivity?</ion-label>
+              </ion-list>
+            </ion-list-header>
+
+            <ion-item *ngFor="let entry of ['Not at all', 'Yes, slightly', 'Yes, immensely']">
+              <ion-label>{{entry}}</ion-label>
+              <ion-radio slot="start" [value]="entry"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+      </ion-card-content>
+      <ion-list>
+        <ion-button type="submit" expand="block" color="tertiary" [disabled]="buttonLoading">Submit
+          &nbsp;&nbsp;<ion-spinner *ngIf="buttonLoading" name="bubbles"></ion-spinner>
+        </ion-button>
+      </ion-list>
+    </form>
+  </ion-card>
+</ion-content>

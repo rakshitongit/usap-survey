@@ -16,9 +16,13 @@ export class AuthService {
         console.log(await this.storageService.get(StorageKeys.USER))
     }
 
+    public getLoginData() {
+        return this.storageService.get(StorageKeys.USER)
+    }
+
     public async isLoggedIn(): Promise<boolean> {
         console.log(await this.storageService.get(StorageKeys.USER))
-        if(await this.storageService.get(StorageKeys.USER) != undefined) {
+        if (await this.storageService.get(StorageKeys.USER) != undefined) {
             return true
         }
         return false

@@ -15,21 +15,28 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { PDFGenerator } from '@awesome-cordova-plugins/pdf-generator/ngx';
-
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
+import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx'
+import { MainSurveyComponent } from './components/main-survey/main-survey.component';
+import { DailySurveyComponent } from './components/daily-survey/daily-survey.component';
 
 @NgModule({
-    declarations: [AppComponent, SurveyComponent, HistoryComponent, MyProfileComponent, LogoutComponent],
+    declarations: [AppComponent, SurveyComponent, HistoryComponent, MyProfileComponent, LogoutComponent, MainSurveyComponent, DailySurveyComponent],
     entryComponents: [SurveyComponent, HistoryComponent, MyProfileComponent],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, IonicStorageModule.forRoot({
         name: '_mydb',
         driverOrder: [Drivers.LocalStorage]
     }),
-    ReactiveFormsModule
+        ReactiveFormsModule
     ],
     providers: [
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         SocialSharing,
-        PDFGenerator
+        PDFGenerator,
+        Geolocation,
+        AndroidPermissions,
+        LocationAccuracy
     ],
     bootstrap: [AppComponent],
 })

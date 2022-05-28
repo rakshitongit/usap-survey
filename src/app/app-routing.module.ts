@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { DailySurveyComponent } from './components/daily-survey/daily-survey.component';
+import { MainSurveyComponent } from './components/main-survey/main-survey.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HistoryComponent } from './pages/history/history.component';
 import { LogoutComponent } from './pages/logout/logout.component';
@@ -9,13 +11,23 @@ import { SurveyComponent } from './pages/survey/survey.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'survey',
+        redirectTo: 'survey/main',
         pathMatch: 'full'
     },
     {
         path: 'survey',
         component: SurveyComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'main',
+                component: MainSurveyComponent
+            },
+            {
+                path: 'daily',
+                component: DailySurveyComponent
+            }
+        ]
     },
     {
         path: 'history',

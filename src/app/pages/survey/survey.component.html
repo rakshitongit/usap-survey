@@ -1,103 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Survey</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"></ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>A Survey for Authentication</ion-label>
-      </ion-item>
-    </ion-card-header>
-    <form [formGroup]="surveyForm" (ngSubmit)="submitSurvey()" novalidate>
-    <ion-card-content>
-      
-      <ion-list>
-        <ion-radio-group [(ngModel)]="surveyData.auth_what" formControlName="auth_what">
-          <ion-list-header>
-            <ion-list>
-              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
-              <ion-label>What are you trying to authenticate?</ion-label>
-            </ion-list>
-          </ion-list-header>
-
-          <ion-item
-            *ngFor="let entry of ['Mobile/Tablet','Laptop/PC','Physical Lock','Website Account', 'Banking Transaction']">
-            <ion-label>{{entry}}</ion-label>
-            <ion-radio slot="start" [value]="entry"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-list>
-
-      <ion-list>
-        <ion-radio-group [(ngModel)]="surveyData.auth_type" formControlName="auth_type">
-          <ion-list-header>
-            <ion-list>
-              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
-              <ion-label>Which authenticator you are using?</ion-label>
-            </ion-list>
-          </ion-list-header>
-
-          <ion-item
-            *ngFor="let entry of ['Password', 'Pin', 'Pattern', 'Biometrics', 'Physical token', 'Other']">
-            <ion-label>{{entry}}</ion-label>
-            <ion-radio slot="start" [value]="entry"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-list>
-
-      <ion-list>
-        <ion-radio-group [(ngModel)]="surveyData.auth_failure" formControlName="auth_failure">
-          <ion-list-header>
-            <ion-list>
-              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
-              <ion-label>How many time have you failed to login?</ion-label>
-            </ion-list>
-          </ion-list-header>
-
-          <ion-item
-            *ngFor="let entry of ['none: successful', 'less than 3', 'less than 5 times', 'less than 10 times']">
-            <ion-label>{{entry}}</ion-label>
-            <ion-radio slot="start" [value]="entry"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-list>
-
-      <ion-list>
-        <ion-radio-group [(ngModel)]="surveyData.auth_convinience" formControlName="auth_convinience">
-          <ion-list-header>
-            <ion-list>
-              <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
-              <ion-label>How convinient was it to authenticate? </ion-label>
-            </ion-list>
-          </ion-list-header>
-
-          <ion-item
-            *ngFor="let entry of ['Very convenient', 'Moderately convenient', 'Not convenient']">
-            <ion-label>{{entry}}</ion-label>
-            <ion-radio slot="start" [value]="entry"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-list>
-
-    </ion-card-content>
-    <ion-list>
-      <ion-button (click)="submitSurvey()" expand="block" color="tertiary" [disabled]="buttonLoading">Submit
-        &nbsp;&nbsp;<ion-spinner *ngIf="buttonLoading" name="bubbles"></ion-spinner>
-      </ion-button>
-    </ion-list>
-  </form>
-  </ion-card>
-</ion-content>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="main">
+      <ion-icon name="pulse"></ion-icon>
+      <ion-label>Auth Survey</ion-label>
+      <ion-badge>1</ion-badge>
+    </ion-tab-button>
+    <ion-tab-button tab="daily">
+      <ion-icon name="logo-buffer"></ion-icon>
+      <ion-label>End of day Questions</ion-label>
+      <ion-badge>5</ion-badge>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

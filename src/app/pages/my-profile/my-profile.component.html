@@ -19,56 +19,47 @@
       <ion-card-subtitle>Enter your details</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">Name</ion-label>
-        <ion-input clearInput [(ngModel)]="user.name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">First Name</ion-label>
-        <ion-input clearInput></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Age</ion-label>
-        <ion-input type="number" clearInput></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Gender</ion-label>
-        <ion-select placeholder="Select One" okText="Okay" cancelText="Dismiss">
-          <ion-select-option value="f">Female</ion-select-option>
-          <ion-select-option value="m">Male</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">University</ion-label>
-        <ion-input clearInput></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Department</ion-label>
-        <ion-select [interfaceOptions]="customOptions" interface="action-sheet" placeholder="Select One">
-          <ion-select-option value="bacon">English and American Studies</ion-select-option>
-          <ion-select-option value="olives">Educational Science</ion-select-option>
-          <ion-select-option value="xcheese">Protestant Theology</ion-select-option>
-          <ion-select-option value="peppers">German Studies and Comparative Literary Studies</ion-select-option>
-          <ion-select-option value="mushrooms">History</ion-select-option>
-          <ion-select-option value="onions">Social and Human Sciences</ion-select-option>
-          <ion-select-option value="pepperoni">Catholic Theology</ion-select-option>
-          <ion-select-option value="pineapple">Art</ion-select-option>
-          <ion-select-option value="sausage">Music</ion-select-option>
-          <ion-select-option value="Spinach">Textiles</ion-select-option>
-          <ion-select-option value="Spinach">Media Studies</ion-select-option>
-          <ion-select-option value="Spinach">Romance Languages</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Highest Qualifications</ion-label>
-        <ion-input clearInput></ion-input>
-      </ion-item>
-      <ion-list class="ion-padding-top" style="text-align:center;">
-        <ion-button color="tertiary" expand="block" (click)="createUser()" [disabled]="buttonLoading">Submit &nbsp;&nbsp;<ion-spinner *ngIf="buttonLoading" name="bubbles"></ion-spinner></ion-button>
-      </ion-list>
+      <form [formGroup]="profileForm" (ngSubmit)="createUser()" novalidate>
+        <ion-item>
+          <ion-label position="stacked">Name</ion-label>
+          <ion-input clearInput formControlName="name" [(ngModel)]="user.name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">First Name</ion-label>
+          <ion-input clearInput formControlName="firstName" [(ngModel)]="user.firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Age</ion-label>
+          <ion-input type="number" clearInput formControlName="age" [(ngModel)]="user.age"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Gender</ion-label>
+          <ion-select placeholder="Select One" okText="Okay" cancelText="Dismiss" formControlName="gender" [(ngModel)]="user.gender">
+            <ion-select-option value="f">Female</ion-select-option>
+            <ion-select-option value="m">Male</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">University</ion-label>
+          <ion-input clearInput formControlName="university" [(ngModel)]="user.university"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Department</ion-label>
+          <ion-input clearInput formControlName="department" [(ngModel)]="user.department"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Highest Qualifications</ion-label>
+          <ion-input clearInput formControlName="qualification" [(ngModel)]="user.qualification"></ion-input>
+        </ion-item>
+        <ion-list class="ion-padding-top" style="text-align:center;">
+          <ion-button color="tertiary" type="submit" expand="block">Submit
+            &nbsp;&nbsp;<ion-spinner *ngIf="buttonLoading" name="bubbles"></ion-spinner>
+          </ion-button>
+        </ion-list>
+      </form>
     </ion-card-content>
   </ion-card>
 
-  
-  
+
+
 </ion-content>

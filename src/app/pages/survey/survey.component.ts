@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
-import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
     selector: 'app-survey',
@@ -10,54 +7,31 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class SurveyComponent implements OnInit {
 
-    buttonLoading: boolean = false
 
-    surveyData: SurveyData = new SurveyData()
+    constructor() { }
 
-    surveyForm: FormGroup;
-
-    constructor(private storageService: StorageService, private toastController: ToastController, private formBuilder: FormBuilder) { }
-
-    ngOnInit() {
-        this.surveyForm = this.formBuilder.group({
-            auth_what: ['', [Validators.required]],
-            auth_type: ['', [Validators.required]],
-            auth_failure: ['', [Validators.required]],
-            auth_convinience: ['', [Validators.required]]
-        })
-    }
-
-    async submitSurvey() {
-        const toast = await this.toastController.create({
-            duration: 2000
-        });
-        this.buttonLoading = !this.buttonLoading
-        if (this.surveyForm.valid) {
-            
-            try {
-                await this.storageService.setHistory(this.surveyData)
-                toast.message = 'Survey submitted successfully!'
-                await toast.present()
-                this.buttonLoading = !this.buttonLoading
-                this.surveyForm.reset()
-            } catch {
-                toast.message = 'Error while submitting data!'
-                await toast.present()
-                this.buttonLoading = !this.buttonLoading
-            }
-        } else {
-            toast.message = 'Please fill all the data before submitting!'
-            await toast.present()
-            this.buttonLoading = !this.buttonLoading
-        }
-    }
+    ngOnInit() { }
 
 
 }
 
-export class SurveyData {
+class AbstractData {
+    latitude: number
+    longitude: number
+    timestamp: number
+}
+
+export class SurveyData extends AbstractData {
     auth_what: string
     auth_type: string
     auth_failure: string
     auth_convinience: string
+}
+
+export class DailySurveyData extends AbstractData {
+    third_party: string
+    third_party_trust: string
+    forgot_to_log: string
+    no_physical_auths: string
+    affect_productivity: string
 }
