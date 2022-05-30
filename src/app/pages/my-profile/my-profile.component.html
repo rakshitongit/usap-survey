@@ -22,11 +22,11 @@
       <form [formGroup]="profileForm" (ngSubmit)="createUser()" novalidate>
         <ion-item>
           <ion-label position="stacked">Name</ion-label>
-          <ion-input clearInput formControlName="name" [(ngModel)]="user.name"></ion-input>
+          <ion-input type="text" clearInput formControlName="name" [(ngModel)]="user.name"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">First Name</ion-label>
-          <ion-input clearInput formControlName="firstName" [(ngModel)]="user.firstName"></ion-input>
+          <ion-input type="text" clearInput formControlName="firstName" [(ngModel)]="user.firstName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Age</ion-label>
@@ -41,15 +41,15 @@
         </ion-item>
         <ion-item>
           <ion-label position="stacked">University</ion-label>
-          <ion-input clearInput formControlName="university" [(ngModel)]="user.university"></ion-input>
+          <ion-input type="text" clearInput formControlName="university" [(ngModel)]="user.university"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Department</ion-label>
-          <ion-input clearInput formControlName="department" [(ngModel)]="user.department"></ion-input>
+          <ion-input type="text" clearInput formControlName="department" [(ngModel)]="user.department"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Highest Qualifications</ion-label>
-          <ion-input clearInput formControlName="qualification" [(ngModel)]="user.qualification"></ion-input>
+          <ion-input type="text" clearInput formControlName="qualification" [(ngModel)]="user.qualification"></ion-input>
         </ion-item>
         <ion-list class="ion-padding-top" style="text-align:center;">
           <ion-button color="tertiary" type="submit" expand="block">Submit

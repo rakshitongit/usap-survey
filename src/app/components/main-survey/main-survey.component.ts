@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
-import { ToastController } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { SurveyData } from 'src/app/pages/survey/survey.component';
 import { locationData, StorageService } from 'src/app/services/storage.service';
 
@@ -20,7 +20,7 @@ export class MainSurveyComponent implements OnInit {
 
     surveyForm: FormGroup;
 
-    constructor(private storageService: StorageService, private toastController: ToastController, private formBuilder: FormBuilder, private geolocation: Geolocation, private permissions: AndroidPermissions, private locationAccuracy: LocationAccuracy) { }
+    constructor(private storageService: StorageService, private toastController: ToastController, private formBuilder: FormBuilder, private plt: Platform) { }
 
     async ngOnInit() {
         this.surveyForm = this.formBuilder.group({
@@ -39,10 +39,12 @@ export class MainSurveyComponent implements OnInit {
         this.buttonLoading = !this.buttonLoading
         if (this.surveyForm.valid) {
             try {
-                await this.storageService.checkGPSPermissions()
+                if (this.plt.is('android' || 'cordova')) {
+                    await this.storageService.checkGPSPermissions()
+                    this.surveyData.latitude = locationData.latitude
+                    this.surveyData.longitude = locationData.longitude
+                }
                 this.surveyData.timestamp = Date.now()
-                this.surveyData.latitude = locationData.latitude
-                this.surveyData.longitude = locationData.longitude
                 await this.storageService.setHistory(this.surveyData)
                 toast.message = 'Survey submitted successfully!'
                 await toast.present()

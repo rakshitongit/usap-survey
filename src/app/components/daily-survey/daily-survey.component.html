@@ -15,14 +15,14 @@
   </ion-header>
 
   <ion-card>
-    <ion-card-header>
+    <ion-card-header style="padding-bottom: 0;">
       <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-icon name="podium" slot="start"></ion-icon>
         <ion-label>Daily Questionnaire</ion-label>
       </ion-item>
     </ion-card-header>
     <form [formGroup]="surveyForm" (ngSubmit)="submitSurvey()" novalidate>
-      <ion-card-content>
+      <ion-card-content style="padding-top: 0;">
 
         <ion-list>
           <ion-radio-group formControlName="third_party">
@@ -104,13 +104,12 @@
             </ion-item>
           </ion-radio-group>
         </ion-list>
-
+        <ion-list>
+          <ion-button type="submit" expand="block" color="tertiary" [disabled]="buttonLoading">Submit
+            &nbsp;&nbsp;<ion-spinner *ngIf="buttonLoading" name="bubbles"></ion-spinner>
+          </ion-button>
+        </ion-list>
       </ion-card-content>
-      <ion-list>
-        <ion-button type="submit" expand="block" color="tertiary" [disabled]="buttonLoading">Submit
-          &nbsp;&nbsp;<ion-spinner *ngIf="buttonLoading" name="bubbles"></ion-spinner>
-        </ion-button>
-      </ion-list>
     </form>
   </ion-card>
 </ion-content>

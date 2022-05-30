@@ -4,7 +4,9 @@ import { PDFGeneratorOptions } from '@awesome-cordova-plugins/pdf-generator';
 import { StorageKeys, StorageService } from 'src/app/services/storage.service';
 import { UserDetails } from '../my-profile/my-profile.component';
 import { DailySurveyData, SurveyData } from '../survey/survey.component';
-import _ from 'lodash';
+import { File } from '@awesome-cordova-plugins/file/ngx';
+import { Papa } from 'ngx-papaparse';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 
 @Component({
     selector: 'app-history',
@@ -19,19 +21,19 @@ export class HistoryComponent implements OnInit {
         documentSize: 'A4',
         landscape: 'landscape',
         type: 'share',
-        fileName: '-log-data.pdf'
+        fileName: '-log-data'
     }
     surveyData: SurveyData[] = []
 
     dailyData: DailySurveyData[] = []
 
-    constructor(private pdf: PDFGenerator, private storageService: StorageService) { }
+    constructor(private pdf: PDFGenerator, private storageService: StorageService, private file: File, private papa: Papa, private social: SocialSharing) { }
 
     async ngOnInit() {
         const user: UserDetails = await this.storageService.get(StorageKeys.USER)
         this.surveyData = await this.storageService.getHistory()
         const ds = await this.storageService.get(StorageKeys.DAILY_SURVEYS)
-        if(ds != null || ds != undefined) {
+        if (ds != null || ds != undefined) {
             this.dailyData = ds
         }
         console.log(this.surveyData)
@@ -39,10 +41,13 @@ export class HistoryComponent implements OnInit {
     }
 
     async createPdf() {
-        let temp = '<head><link rel="stylesheet" href="<%=css_file%>"></head><body>'
-        let payload = _.template(temp + document.getElementById('print-wrapper').innerHTML + '</body>')
-        const cssFile = './styles.css'
-        await this.pdf.fromData(payload({ css_file: cssFile }), this.options)
+        const csv = this.papa.unparse({
+            fields: Object.keys(this.surveyData[0]),
+            data: this.surveyData
+        });
+        const res = await this.file.writeFile(this.file.dataDirectory, this.options.fileName + '.csv', csv, { replace: true })
+        await this.social.share('Sharing Survey data', null, res.nativeURL, null)
+        await this.pdf.fromData(document.getElementById('print-wrapper').innerHTML, this.options)
     }
 
 }

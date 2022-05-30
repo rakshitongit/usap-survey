@@ -20,9 +20,12 @@ import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx'
 import { MainSurveyComponent } from './components/main-survey/main-survey.component';
 import { DailySurveyComponent } from './components/daily-survey/daily-survey.component';
+import { File } from '@awesome-cordova-plugins/file/ngx';
+import { MainComponent } from './components/history/main/main.component';
+import { DailyComponent } from './components/history/daily/daily.component';
 
 @NgModule({
-    declarations: [AppComponent, SurveyComponent, HistoryComponent, MyProfileComponent, LogoutComponent, MainSurveyComponent, DailySurveyComponent],
+    declarations: [AppComponent, SurveyComponent, HistoryComponent, MyProfileComponent, LogoutComponent, MainSurveyComponent, DailySurveyComponent, MainComponent, DailyComponent],
     entryComponents: [SurveyComponent, HistoryComponent, MyProfileComponent],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, IonicStorageModule.forRoot({
         name: '_mydb',
@@ -36,7 +39,9 @@ import { DailySurveyComponent } from './components/daily-survey/daily-survey.com
         PDFGenerator,
         Geolocation,
         AndroidPermissions,
-        LocationAccuracy
+        LocationAccuracy,
+        SocialSharing,
+        File
     ],
     bootstrap: [AppComponent],
 })

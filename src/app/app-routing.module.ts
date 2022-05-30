@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DailySurveyComponent } from './components/daily-survey/daily-survey.component';
+import { DailyComponent } from './components/history/daily/daily.component';
+import { MainComponent } from './components/history/main/main.component';
 import { MainSurveyComponent } from './components/main-survey/main-survey.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HistoryComponent } from './pages/history/history.component';
@@ -32,7 +34,17 @@ const routes: Routes = [
     {
         path: 'history',
         component: HistoryComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'main',
+                component: MainComponent
+            },
+            {
+                path: 'daily',
+                component: DailyComponent
+            }
+        ]
     },
     {
         path: 'myProfile',

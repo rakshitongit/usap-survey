@@ -4,7 +4,14 @@ import { Coordinates, Geolocation } from '@awesome-cordova-plugins/geolocation/n
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
 
 import { Storage } from '@ionic/storage-angular';
-import { SurveyData } from '../pages/survey/survey.component';
+import { AbstractData, SurveyData } from '../pages/survey/survey.component';
+import * as XLSX from 'xlsx';
+import FileSaver from 'file-saver';
+import { File } from '@awesome-cordova-plugins/file/ngx';
+import { Papa } from 'ngx-papaparse';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +19,7 @@ import { SurveyData } from '../pages/survey/survey.component';
 export class StorageService {
     private _storage: Storage | null = null;
 
-    constructor(private storage: Storage, private permissions: AndroidPermissions, private locationAccuracy: LocationAccuracy, private geolocation: Geolocation) {
+    constructor(private storage: Storage, private permissions: AndroidPermissions, private locationAccuracy: LocationAccuracy, private geolocation: Geolocation, private file: File, private papa: Papa, private social: SocialSharing) {
         this.init();
     }
 
@@ -79,6 +86,24 @@ export class StorageService {
         await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY)
         const resp = await this.geolocation.getCurrentPosition()
         locationData = resp.coords
+    }
+
+    async shareCSVData(fields: string[], data: AbstractData[], fileName: string) {
+        const csvData = this.papa.unparse({
+            fields, data
+        })
+        const res = await this.file.writeFile(this.file.dataDirectory, fileName, csvData, { replace: true })
+        return this.social.share('Sharing Survey data', null, res.nativeURL, null)
+    }
+
+    exportAsCSV(data: AbstractData[], data_daily: AbstractData[], filename: string) {
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+        const ws1: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data_daily);
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'survey data');
+        XLSX.utils.book_append_sheet(wb, ws1, 'daily auth data');
+        const buffer = XLSX.writeXLSX(wb, { bookType: 'xlsx', type: 'array' })
+        XLSX.writeFile(wb, filename)
     }
 }
 

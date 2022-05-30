@@ -15,7 +15,7 @@ export class SurveyComponent implements OnInit {
 
 }
 
-class AbstractData {
+export class AbstractData {
     latitude: number
     longitude: number
     timestamp: number

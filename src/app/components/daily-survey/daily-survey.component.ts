@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Platform } from '@ionic/angular';
 import { toastController } from '@ionic/core';
 import { DailySurveyData } from 'src/app/pages/survey/survey.component';
 import { StorageService, StorageKeys, locationData } from 'src/app/services/storage.service';
@@ -19,7 +20,7 @@ export class DailySurveyComponent implements OnInit {
 
     surveyForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private storageService: StorageService) { }
+    constructor(private fb: FormBuilder, private storageService: StorageService, private plt: Platform) { }
 
     ngOnInit() {
         this.surveyForm = this.fb.group({
@@ -38,19 +39,20 @@ export class DailySurveyComponent implements OnInit {
         this.buttonLoading = !this.buttonLoading
         if (this.surveyForm.valid) {
             try {
-                await this.storageService.checkGPSPermissions()
                 const data: DailySurveyData = new DailySurveyData()
+                if (this.plt.is('android' || 'cordova')) {
+                    await this.storageService.checkGPSPermissions()
+                    data.latitude = locationData.latitude
+                    data.longitude = locationData.longitude
+                }
                 data.third_party = this.surveyForm.get('third_party').value
                 data.third_party_trust = this.surveyForm.get('third_party_trust').value
                 data.no_physical_auths = this.surveyForm.get('no_physical_auths').value
                 data.forgot_to_log = this.surveyForm.get('forgot_to_log').value
                 data.affect_productivity = this.surveyForm.get('affect_productivity').value
                 data.timestamp = Date.now()
-                data.latitude = locationData.latitude
-                data.longitude = locationData.longitude
-                
                 let surveys: DailySurveyData[] = await this.storageService.get(StorageKeys.DAILY_SURVEYS)
-                if(surveys == null || surveys == undefined) {
+                if (surveys == null || surveys == undefined) {
                     surveys = []
                 }
                 console.log(data, surveys)
@@ -60,7 +62,7 @@ export class DailySurveyComponent implements OnInit {
                 this.buttonLoading = !this.buttonLoading
                 await toast.present()
                 this.surveyForm.reset()
-            } catch(e) {
+            } catch (e) {
                 console.error(e)
                 toast.message = 'Please enable your location!'
                 this.buttonLoading = !this.buttonLoading
