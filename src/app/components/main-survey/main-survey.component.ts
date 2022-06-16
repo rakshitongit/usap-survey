@@ -39,11 +39,11 @@ export class MainSurveyComponent implements OnInit {
         this.buttonLoading = !this.buttonLoading
         if (this.surveyForm.valid) {
             try {
-                if (this.plt.is('android' || 'cordova')) {
-                    await this.storageService.checkGPSPermissions()
-                    this.surveyData.latitude = locationData.latitude
-                    this.surveyData.longitude = locationData.longitude
-                }
+                // if (this.plt.is('android' || 'cordova')) {
+                //     await this.storageService.checkGPSPermissions()
+                //     this.surveyData.latitude = locationData.latitude
+                //     this.surveyData.longitude = locationData.longitude
+                // }
                 this.surveyData.timestamp = Date.now()
                 await this.storageService.setHistory(this.surveyData)
                 toast.message = 'Survey submitted successfully!'
