@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="downloadData()">
+        <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Daily Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+      <ion-buttons slot="primary">
+
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="print-pdf">
+    <div class="print-wrapper">
+      <ion-card *ngIf="surveyData.length > 0">
+        <ion-card-header>
+          <ion-card-title>Daily Questionnaire</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <span></span>
+            <ion-accordion [value]="ds.timestamp" *ngFor="let ds of surveyData; let i = index">
+              <ion-item slot="header">
+                <ion-label># {{i+1}}</ion-label>
+              </ion-item>
+          
+              <ion-list slot="content">
+                <ion-item>
+                  <ion-label class="fs-15">App to save passwords:</ion-label>
+                  <ion-badge slot="end" color="tertiary">{{ds.third_party}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                  <ion-label class="fs-15">Trust that app:</ion-label>
+                  <ion-badge slot="end" color="tertiary">{{ds.third_party_trust}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                  <ion-label class="fs-15"># forgot to log:</ion-label>
+                  <ion-badge slot="end" color="tertiary">{{ds.forgot_to_log}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                  <ion-label class="fs-15"># Authenticators:</ion-label>
+                  <ion-badge slot="end" color="tertiary">{{ds.no_physical_auths}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                  <ion-label class="fs-15">Affect productivity:</ion-label>
+                  <ion-badge slot="end" color="tertiary">{{ds.affect_productivity}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                  <ion-label class="fs-15">Date:</ion-label>
+                  <ion-badge slot="end" color="tertiary">{{ds.timestamp | date:'dd/MM/yyyy'}}</ion-badge>
+                </ion-item>
+              </ion-list>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>  
+    </div>
+  </div>
+</ion-content>

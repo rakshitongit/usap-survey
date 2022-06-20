@@ -1,0 +1,102 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="downloadData()">
+        <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Authentication Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+      <ion-buttons slot="primary">
+
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="print-pdf">
+    <div class="print-wrapper">
+      <!-- <h5 class="h5-this ion-margin">Authentication survey</h5> -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Authentication survey</ion-card-title>
+        </ion-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col>#</ion-col>
+              <ion-col>For what</ion-col>
+              <ion-col>Type</ion-col>
+              <ion-col>Failure</ion-col>
+              <ion-col>Convinience</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let s of surveyData; let i = index">
+              <ion-col>{{i+1}}</ion-col>
+              <ion-col>{{s.auth_what}}</ion-col>
+              <ion-col>{{s.auth_type}}</ion-col>
+              <ion-col>{{s.auth_failure}}</ion-col>
+              <ion-col>{{s.auth_convinience}}</ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-card>
+
+
+      <!-- <div id="print-wrapper" style="display: none;">
+        <table>
+          <thead>
+            <tr>
+              <th>For what</th>
+              <th>Type</th>
+              <th>Failure</th>
+              <th>Convinience</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of surveyData">
+              <td data-column="For what">{{s.auth_what}}</td>
+              <td data-column="Type">{{s.auth_type}}</td>
+              <td data-column="Failure">{{s.auth_failure}}</td>
+              <td data-column="Convinience">{{s.auth_convinience}}</td>
+              <td data-column="Latitude">{{s.latitude}}</td>
+              <td data-column="Longitude">{{s.longitude}}</td>
+              <td data-column="Date">{{s.timestamp | date:'dd/MM/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+              <th>App for passwords</th>
+              <th>Trust authenticator</th>
+              <th># Forgot to log</th>
+              <th># Authenticators</th>
+              <th>Affect productivity</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ds of dailyData">
+              <td>{{ds.third_party}}</td>
+              <td>{{ds.third_party_trust}}</td>
+              <td>{{ds.forgot_to_log}}</td>
+              <td>{{ds.no_physical_auths}}</td>
+              <td>{{ds.affect_productivity}}</td>
+              <td>{{ds.timestamp | date:'dd/MM/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+    </div>
+  </div>
+</ion-content>

@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.usapsurvey.www",
 	"appName": "USaP Survey",
 	"webDir": "www",
 	"bundledWebRuntime": false
