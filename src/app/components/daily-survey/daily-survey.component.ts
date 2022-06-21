@@ -40,11 +40,11 @@ export class DailySurveyComponent implements OnInit {
         if (this.surveyForm.valid) {
             try {
                 const data: DailySurveyData = new DailySurveyData()
-                // if (this.plt.is('android' || 'cordova')) {
-                //     await this.storageService.checkGPSPermissions()
-                //     data.latitude = locationData.latitude
-                //     data.longitude = locationData.longitude
-                // }
+                if (this.plt.is('android' || 'cordova')) {
+                    await this.storageService.checkGPSPermissions()
+                    data.latitude = locationData.latitude
+                    data.longitude = locationData.longitude
+                }
                 data.third_party = this.surveyForm.get('third_party').value
                 data.third_party_trust = this.surveyForm.get('third_party_trust').value
                 data.no_physical_auths = this.surveyForm.get('no_physical_auths').value
