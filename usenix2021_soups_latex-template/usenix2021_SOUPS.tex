@@ -96,7 +96,7 @@ doi = {10.1038/sj.ejcn.1602487}
 \date{}
 
 % make title bold and 14 pt font (Latex default is non-bold, 16 pt)
-\title{\Large \bf A Replication Study of Authentication in Daily life of the University Students}
+\title{\Large \bf A Study of Authentication in Daily Life of University Students}
 
 % if you leave this blank it will default to a possibly ugly attempt 
 % to make the contents of the \author command below into a string
@@ -137,26 +137,20 @@ We are surveying 20 people to determine the usability of the daily authenticatio
 %-------------------------------------------------------------------------------
 \section{Introduction}
 %-------------------------------------------------------------------------------
-Many of us carry a lot of authentication devices with us in our daily life. These devices include a car key, house key, corporate badge, bike key, RSA token, bus pass, credit card, driver's license, ATM card \cite{197318}. We also remember the passwords and use fingerprints and faceiDs to unlock the devices. These are called authenticators, tools for authentications or confirming the user's identity. By proving that they own and are in control of an authenticator, a person authenticates to a computer system or application. \\
-\textbf{Types of authentications:} We formalised a few most common authentication techniques that users use daily. These include security questions, Passwords, Pins, SMS voice or email OTPs, Push notifications, Physical tokens, and Biometrics.
+Many of us carry a lot of authentication devices with us in our daily life. These devices include a car key, house key, corporate badge, bike key, RSA token, bus pass, credit card, driver's license, ATM card \cite{197318}. We also remember the passwords and use fingerprints and faceiDs to unlock the devices. These are called authenticators, tools for authentications or confirming the user's identity. By proving that they are in control of an authenticator, a person authenticates to a computer system or application. Recent studies have found that it is burdensome, and there is no insight into current authentication habits and burdens. To fill out this gap, we replicate the study by Mare et al. \cite{197318} and focus only on university students for our survey. To carry out the survey, we have developed a tool in the form of a mobile application% 
+\footnote{Github URL: https://github.com/rakshitongit/usap-survey} to log the participants' data. \\
+\textbf{Types of authentications:} We summarised a few most common authentication techniques that users use daily. These include security questions, Passwords, Pins, SMS voice or email OTPs, Push notifications, Physical tokens, and Biometrics.
+
+Today, it has become very stressful for users with so many different types of authentication techniques available.  Users have questions like whom to trust or which of these authentication types is more secure. There are some problems with these authentication techniques; if you enable 2-factor authentication and lose the device responsible for that, you will not be able to authenticate further. Witty et al. \cite{} concluded from their research that it takes around \$50 - \$150 to resolve issues and reset passwords. We investigate the following research questions to determine the usability of the authentication in daily life. 
 \begin{enumerate}
-    \item \textbf{Security Questions:} These are some personal questions which are being asked by the Software to identify the users and verify them.
-    \item \textbf{Passwords:} Softwares use classical passwords, secret words, or a group of words to verify the user. 
-    \item \textbf{Pins:} These are usually numbers used in mobiles or laptops as an alternative to the passwords for quick login. 
-    \item \textbf{OTPs:} OTP or One-time password means Software will send a password on your devices like mobiles or laptops via SMS or emails.
-    \item \textbf{Push notifications:} This is one of the latest forms of the authentication technique in which the users need first to configure their mobile devices with the Software. Later while authenticating the user, the Software will send a push notification to the registered mobile device wherein the user can confirm and log in. 
-    \item \textbf{Physical tokens:} These are physical keys encrypted using cryptographic algorithms and randomly generated each time the user wants to authenticate.
-    \item \textbf{Biometrics:} These include fingerprints, voice recognition, face IDs etc., specially designed to recognise the user uniquely.
-\end{enumerate}
-Today, it has become very stressful for users with so many different types of authentication techniques available.  Users have questions like Whom to trust or which of these authentication types is more secure. There are some problems with these authentication techniques; if you enable 2-factor authentication and lose the device responsible for that, you will not be able to authenticate further. Witty et al. \cite{} concluded from their research that it takes around \$50 - \$150 to resolve issues and reset passwords. We raise a few questions to determine the usability of the authentication. 
-\begin{enumerate}
-    \item What are the users' various types of authentication techniques, and how much of a burden is it?
+    \item What are the university students' various types of authentication techniques?
+    \item How much of a burden is it to authenticate in their daily life?
     \item How failure-prone are the different types of authentication? 
     \item Does the general public concur on the types of authentication they prefer or not?
 \end{enumerate}
 
-To tackle these queries, we conducted a wearable digital diary user survey of 20 people, which included university students, to better understand the user authentication burden. This will be explained in detailed in section \ref{sec:method}.
-
+To tackle these queries, we conducted a wearable digital diary user survey of 20 people, which included university students, to better understand the user authentication burden. We chose university students because it became easy for them to explain the purpose of our research, and we quickly got some volunteers to participate in our study. First, we conducted a pre-interview session with the university students, explained our study, and encouraged them to participate in the survey. People who agreed to participate needed to sign a consent form%
+\footnote{Link: shorturl.at/jrzP6} to prove that our survey was ethically correct to the participants. The university students then completed the survey by logging their authentication data for four days. After the survey, we conducted a post-logging interview to determine the study and get feedback from them. We did a qualitative analysis based on the post-logging sessions. 
 
 %-------------------------------------------------------------------------------
 \section{Related Work}
@@ -220,53 +214,60 @@ The participants must log the authentication data each time they do an authentic
 \textbf{Authenticators:} Password (locker combinations, etc.), PINS, Biometrics (Fingerprint, Face biometrics, Voice biometrics), Card (ID cards, credit cards, badges), Physical tokens (Certificate (PKI)), Mouse click (where the participant has to click to authenticate, e.g., to request autofill with a password manager), Lock key (physical key), Signature, 2-Factor authenticators, and Other%
 \footnote{These are general authenticators and authentication target devices which are being used by many users.}.
 
+\begin{enumerate}
+    \item \textbf{Security Questions:} These are some personal questions which are being asked by the Software to identify the users and verify them.
+    \item \textbf{Passwords:} Softwares use classical passwords, secret words, or a group of words to verify the user. 
+    \item \textbf{Pins:} These are usually numbers used in mobiles or laptops as an alternative to the passwords for quick login. 
+    \item \textbf{OTPs:} OTP or One-time password means Software will send a password on your devices like mobiles or laptops via SMS or emails.
+    \item \textbf{Push notifications:} This is one of the latest forms of the authentication technique in which the users need first to configure their mobile devices with the Software. Later while authenticating the user, the Software will send a push notification to the registered mobile device wherein the user can confirm and log in. 
+    \item \textbf{Physical tokens:} These are physical keys encrypted using cryptographic algorithms and randomly generated each time the user wants to authenticate.
+    \item \textbf{Biometrics:} These include fingerprints, voice recognition, face IDs etc., specially designed to recognise the user uniquely.
+\end{enumerate}
+
 In the survey, we are also interested in knowing the authentication location and the time the authentication takes place. We are also interested in the number of attempts before successful authentication and the convenience of the authentication events. Therefore, our authentication event is a tuple consisting of \{\textit{authentication-location, authentication-time, authentication target, authenticator, authentication-success, authentication-convenience}\}
 \subsection{Digital Diary}
 \begin{figure}
 \begin{center}
-  \includegraphics[width=150]{images/profile.png}
+  \includegraphics[scale=0.5]{images/profile.png}
 \end{center}
 \caption{\label{fig:app-profile} Mobile application - User Profile}
 \end{figure}
 \begin{figure}
 \begin{center}
-  \includegraphics[width=150]{images/main-survey.png}
+  \includegraphics[scale=0.5]{images/main-survey-1.png}
 \end{center}
 \caption{\label{fig:app-main-survey} Mobile application - Main Survey}
 \end{figure}
+Lillegaard et al. \cite{lillegaard} suggested that digital dairies are a practical way to immediately and easily log events. Digital diaries are especially useful for events like authentication, which happen repeatedly and pulling out a paper notebook and pen or using a physical journal is difficult. Therefore, we developed a mobile application%
+\footnote{Github URL: https://github.com/rakshitongit/usap-survey} that is easy to use and download for android users. For the other users, we deployed the webview%
+\footnote{URL: https://n5lis62ifu.appflowapp.com/} of the mobile app. As shown in Figure \ref{fig:app-profile}, the participants must first fill up some of their personal data. As soon as they fill in this information, the participants are permitted to start with the survey. The survey page contains various types of questions (see Figure \ref{fig:app-main-survey}). The participant cannot submit unless all the questions are answered. The mobile application automatically collects the location (latitude and longitude) and the timestamp at which the participant has logged the data. In the neighbouring tab (see Figure \ref{fig:app-daily-survey}), the participant can find the daily questions, which the participant needs to fill in for the feedback and the qualitative data analysis. For an authentication event, we want to collect the authentication target, the authenticator, success or failure, number of attempts required (in case of success), location, and time. The app automatically collects GPS location and time, but participants must log the other four details. Event logging should be quick and straightforward to minimise disruption to the participants' ongoing tasks. If not, they will probably put off logging in and could forget to do so later. So, we came up with a mobile app which has only four questions and is easy to use. Some participants liked the interface of the app, while some suggested some improvements to the mobile app. We did several iterations of the mobile app development and finally came up with the interface seen in Figure \ref{fig:app-daily-survey} \& \ref{fig:app-main-survey}. The first question is to determine the authentication target, i.e. what is the participant trying to authenticate. We had five options: \texttt{Mobile/Tablet}, \texttt{Laptop/PC}, \texttt{Physical lock}, \texttt{Web application}, and \texttt{Banking transaction}. The second question determined the authenticator used by the participants, i.e. how the participants were authenticating the target device. We had six options: \texttt{Password}, \texttt{Pin}, \texttt{Patterns}, \texttt{Biometrics} (this included \textit{Voice}, \textit{Gait}, \textit{Heartbeat}, \textit{Eye-tracking}, \textit{Brain Waves}, \textit{Fingerprint}, and \textit{Iris scan}), \texttt{Physical Tokens}, and any \texttt{other} form of an authenticator. The third question determined the \textit{success/failure} and the number of times needed to authenticate. The options included: \texttt{None} (which meant success), \texttt{Less than 3}, \texttt{Less than 5}, and \texttt{Less than 10}.
+The final question determined the convenience of the authentication. The options included: \texttt{Very convenient}, \texttt{Moderately convenient} and \texttt{Not convenient}. With this question, we would like to assess the usability of the authentication technique. In the pilot study, where we selected two people to log the data and get their feedback, they told us that they use many electronic devices and have various biometric techniques to log in to their devices. The options were a lot, so we decided to generalise them to an option "Biometrics''. Similarly, we explained to the users the other options in the pre-logging sessions. E.g. three people did not know what physical tokens are, so we gave them an overview. 
 \begin{figure}
 \begin{center}
-  \includegraphics[width=150]{images/daily-survey.png}
+  \includegraphics[scale=0.5]{images/eod-survey.png}
 \end{center}
 \caption{\label{fig:app-daily-survey} Mobile application - Daily Survey}
 \end{figure}
-Lillegaard et al. \cite{lillegaard} suggested that digital dairies are a practical way to immediately and easily log events. Digital diaries are especially useful for events like authentication, which happen repeatedly and pulling out a paper notebook and pen or using a physical journal is difficult. Therefore, we developed a mobile application%
-\footnote{Github URL: https://github.com/rakshitongit/usap-survey} that is easy to use and download for android users. For the other users, we deployed the webview%
-\footnote{URL: https://n5lis62ifu.appflowapp.com/} of the mobile app. Most of the participants found the app convenient to log the data. As shown in Figure \ref{fig:app-profile}, the participants must first fill up some of their personal data. As soon as they fill in this information, the participants are permitted to start with the survey. The survey page contains various types of questions (see Figure \ref{fig:app-main-survey}). The participant cannot submit unless all the questions are answered. The mobile application automatically collects the location (latitude and longitude) and the timestamp at which the participant has logged the data. In the neighbouring tab (see Figure \ref{fig:app-daily-survey}), the participant can find the daily questions, which the participant needs to fill in for the feedback and the qualitative data analysis. 
-\subsection{Methodology successes and failures}
 \subsection{Study procedure}
-Recruitment and enrollment
-Pre-logging interview
-Post-logging interview
-\subsection{Methodology successes and failures}
+Study procedure begins here
+\subsubsection{Recruitment and enrollment}
+\subsubsection{Pre-logging interview}
+\subsubsection{Post-logging interview}
 
 \section{LIMITATIONS}
+\subsection{Methodology successes and failures}
 \section{FINDINGS}
-Results - Qualitative and quantitative analysis
+\subsection{Results}
+Explain about Qualitative and/or quantitative analysis
 \subsection{Authentication burden}
 %-----------------------------------
-
-People often use \texttt{pdflatex} these days for creating pdf-s from
-tex files via the shell. And \texttt{bibtex}, of course. Works for us.
+Explain how authentication has become a burden to the people
 
 %-------------------------------------------------------------------------------
+\section{Conclusion}
 \section*{Acknowledgments}
 %-------------------------------------------------------------------------------
-
-The USENIX latex style is old and very tired, which is why
-there's no \textbackslash{}acks command for you to use when
-acknowledging. Sorry.
-
+Acknowledging the participants for their time...
 
 %-------------------------------------------------------------------------------
 \bibliographystyle{plain}
